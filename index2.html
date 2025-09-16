@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Contagem Regressiva para o Natal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 20px 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+    .timer {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎄 Contagem Regressiva para o Natal 🎅</h1>
+    <div class="timer" id="timer"></div>
+  </div>
+
+  <script>
+    // Natal de 2025 (25 de dezembro, 00:00)
+    const natal = new Date(2025, 11, 25, 0, 0, 0); 
+    // 👆 Lembrando: mês é 0-11 (11 = dezembro)
+
+    function atualizarContagem() {
+      const agora = new Date();
+      const diff = natal - agora;
+
+      const timerDiv = document.getElementById("timer");
+
+      if (diff <= 0) {
+        timerDiv.textContent = "🎉 Feliz Natal!";
+        clearInterval(interval);
+        return;
+      }
+
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((diff % (1000 * 60)) / 1000);
+
+      timerDiv.textContent = `${dias}d ${horas}h ${minutos}m ${segundos}s restantes`;
+    }
+
+    atualizarContagem(); // chama já na primeira vez
+    const interval = setInterval(atualizarContagem, 1000); // atualiza a cada 1s
+  </script>
+</body>
+</html>
